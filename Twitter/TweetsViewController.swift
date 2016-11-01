@@ -12,9 +12,11 @@ class TweetsViewController: UIViewController {
     var tweets: [Tweet]! = []
     
     @IBOutlet weak var tableView: UITableView!
+    var refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupRefreshControl()
         tableView.dataSource = self;
         tableView.delegate = self;
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -41,7 +43,32 @@ class TweetsViewController: UIViewController {
     @IBAction func onLogoutButton(_ sender: AnyObject) {
         TwitterClient.sharedInstance?.logout()
     }
-
+    
+    func setupRefreshControl() {
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self,
+                                 action: #selector(refreshControlAction(refreshControl:)),
+                                 for: UIControlEvents.valueChanged)
+        tableView.insertSubview(refreshControl, at: 0)
+    }
+    
+    func refreshControlAction(refreshControl: UIRefreshControl) {
+        
+        TwitterClient.sharedInstance?.homeTimeLine(success: { (tweets: [Tweet]) -> () in
+            self.tweets = tweets
+            
+            for tweet in tweets {
+                self.tweets.append(tweet)
+            }
+            
+            self.tableView.reloadData()
+            self.refreshControl.endRefreshing()
+            }, failure: { (error: Error)-> () in
+                print(error.localizedDescription)
+                self.refreshControl.endRefreshing()
+        })
+    }
     /*
     // MARK: - Navigation
 
