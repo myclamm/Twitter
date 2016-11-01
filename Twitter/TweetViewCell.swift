@@ -14,6 +14,7 @@ class TweetViewCell: UITableViewCell {
     @IBOutlet weak var tweetTextLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var timestampLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
     
     
     var tweet: Tweet! {
@@ -25,8 +26,9 @@ class TweetViewCell: UITableViewCell {
                 profileImageView.image = nil
             }
             tweetTextLabel.text = tweet.text
-            usernameLabel.text = tweet.username
+            usernameLabel.text = "@\(tweet.username!)"
             timestampLabel.text = tweet.timestamp
+            nameLabel.text = tweet.name
         }
     }
     

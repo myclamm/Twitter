@@ -12,15 +12,16 @@ class TweetDetailViewController: UIViewController {
 
     var tweet : Tweet!
     
+    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var tweetTextLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        usernameLabel.text = tweet.username
+        usernameLabel.text = "@\(tweet.username!)"
         tweetTextLabel.text = tweet.text
-        
+        nameLabel.text = tweet.name
         if let profileImageURL = tweet.profileImageURL {
             profileImageView.setImageWith(profileImageURL)
         } else {
