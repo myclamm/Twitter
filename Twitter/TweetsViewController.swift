@@ -69,16 +69,23 @@ class TweetsViewController: UIViewController {
                 self.refreshControl.endRefreshing()
         })
     }
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
+        
+        if segue.identifier == "detailSegue" {
+            let cell = sender as! TweetViewCell
+            let indexPath = tableView.indexPath(for: cell)
+            let selectedTweet = self.tweets[(indexPath?.row)!]
+            let destinationViewController = segue.destination as! TweetDetailViewController
+            
+            destinationViewController.tweet = selectedTweet
+        }
+        
     }
-    */
-
 }
 
 // MARK: - UITableViewDataSource
@@ -103,7 +110,7 @@ extension TweetsViewController : UITableViewDataSource {
 extension TweetsViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+
     }
     
 }

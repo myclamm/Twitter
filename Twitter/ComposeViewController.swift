@@ -14,6 +14,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var usernameLabel: UILabel!
     
     @IBOutlet weak var tweetTextView: UITextView!
+    var replyToId : Int?
+    var replyToUser: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +27,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
             profileImageView.setImageWith(profileImageURL)
         } else {
             profileImageView.image = nil
+        }
+        
+        if(replyToUser != nil){
+            tweetTextView.text = "@\(replyToUser!)"
         }
     }
 
@@ -38,12 +44,18 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func onSendTweetButton(_ sender: AnyObject) {
-        let params = [
+        var params = [
             "status" : tweetTextView.text!
         ]
+        if(replyToId != nil){
+            params["in_reply_to_status_id"] = String(describing: replyToId)
+        }
         TwitterClient.sharedInstance?.sendTweet(paramaters: params as NSDictionary, success: { ()->() in
             print("sent tweet: \(self.tweetTextView.text)")
             self.tweetTextView.text = ""
+            self.replyToId = nil
+            self.replyToUser = nil
+            
             }, failure: { (error: Error) in
                 print("error sending tweet: \(error)")
         })
