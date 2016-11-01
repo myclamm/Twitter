@@ -10,7 +10,7 @@ import UIKit
 
 class Tweet: NSObject {
     var text: String?
-    var timestamp: Date?
+    var timestamp: String?
     var retweetCount: Int = 0
     var favoritesCount: Int = 0
     var profileImageURL: URL?
@@ -39,7 +39,9 @@ class Tweet: NSObject {
         if let timestampString = timestampString {
             let formatter = DateFormatter()
             formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
-            timestamp = formatter.date(from: timestampString)
+            let date = formatter.date(from: timestampString)
+            formatter.dateFormat = "MMM d, H:mm a"
+            timestamp = formatter.string(from: date!)
         }
     }
     

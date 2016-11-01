@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -64,32 +65,45 @@
                                             <frame key="frameInset" width="375" height="144"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NPC-yY-ZQU">
-                                                    <frame key="frameInset" minX="18" minY="8" width="84" height="84"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NPC-yY-ZQU">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="84" id="YVh-d6-MrT"/>
+                                                        <constraint firstAttribute="height" constant="84" id="jiT-R7-kEw"/>
+                                                    </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WZd-kh-2Ya">
-                                                    <frame key="frameInset" minX="122" minY="8" width="76" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WZd-kh-2Ya">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="142" id="AEh-Lq-rYi"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="tweetTextLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KFe-rF-IK5">
-                                                    <frame key="frameInset" minX="122" minY="40" width="177" height="52"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tweetTextLabel" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KFe-rF-IK5">
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="timestamp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ysr-pp-1C5">
-                                                    <frame key="frameInset" minX="286" minY="8" width="81" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="timestamp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ysr-pp-1C5">
+                                                    <frame key="frameInset" minX="176" width="142" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="KFe-rF-IK5" secondAttribute="bottom" constant="8" id="1tC-NK-ZgW"/>
+                                                <constraint firstItem="Ysr-pp-1C5" firstAttribute="top" secondItem="a2z-f1-Xe1" secondAttribute="top" id="7Bm-sG-viW"/>
+                                                <constraint firstAttribute="trailing" secondItem="Ysr-pp-1C5" secondAttribute="trailing" constant="57" id="8au-UM-tlP"/>
+                                                <constraint firstItem="NPC-yY-ZQU" firstAttribute="leading" secondItem="a2z-f1-Xe1" secondAttribute="leadingMargin" id="DsN-fF-Va9"/>
+                                                <constraint firstItem="NPC-yY-ZQU" firstAttribute="top" secondItem="WZd-kh-2Ya" secondAttribute="bottom" constant="8" id="W0c-CT-qR1"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="NPC-yY-ZQU" secondAttribute="bottom" constant="22" id="XGx-Z5-N7J"/>
+                                                <constraint firstItem="KFe-rF-IK5" firstAttribute="leading" secondItem="NPC-yY-ZQU" secondAttribute="trailing" constant="23" id="e3U-Yp-jvq"/>
+                                                <constraint firstItem="WZd-kh-2Ya" firstAttribute="leading" secondItem="a2z-f1-Xe1" secondAttribute="leading" constant="8" id="hYd-uU-Lhc"/>
+                                                <constraint firstItem="KFe-rF-IK5" firstAttribute="top" secondItem="WZd-kh-2Ya" secondAttribute="bottom" constant="8" id="mv7-FH-fsz"/>
+                                                <constraint firstItem="WZd-kh-2Ya" firstAttribute="top" secondItem="a2z-f1-Xe1" secondAttribute="top" constant="1" id="rc7-9r-peu"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="KFe-rF-IK5" secondAttribute="trailing" constant="49" id="yhe-mc-sTi"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="profileImageView" destination="NPC-yY-ZQU" id="JuT-Kw-Znh"/>

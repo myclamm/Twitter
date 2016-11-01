@@ -27,6 +27,7 @@ class TweetViewCell: UITableViewCell {
             }
             tweetTextLabel.text = tweet.text
             usernameLabel.text = tweet.username
+            timestampLabel.text = tweet.timestamp
         }
     }
     
