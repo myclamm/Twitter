@@ -30,7 +30,7 @@ class Tweet: NSObject {
             profileImageURL = URL(string:profileImageString)
         }
         
-        username = user?["name"] as? String
+        username = user?["screen_name"] as? String
 
         
         let timestampString = dictionary["created_at"] as? String

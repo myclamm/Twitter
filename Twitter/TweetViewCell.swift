@@ -18,7 +18,6 @@ class TweetViewCell: UITableViewCell {
     
     var tweet: Tweet! {
         didSet {
-            print("---->profileImageUrl: \(tweet.profileImageURL)")
             if let profileImageURL = tweet.profileImageURL {
                 print("type: \(type(of:profileImageURL))")
                 profileImageView.setImageWith(profileImageURL)
