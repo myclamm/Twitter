@@ -10,6 +10,7 @@ import UIKit
 
 class ComposeViewController: UIViewController, UITextViewDelegate {
 
+    @IBOutlet weak var charCountLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     
@@ -60,6 +61,21 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
                 print("error sending tweet: \(error)")
         })
     }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        // Capture text from compose box
+        var text = textView.text!
+        var charCount = text.characters.count
+        // If charCount>=140 freeze textview
+        if (charCount > 140) {
+            text.remove(at: text.index(before: text.endIndex))
+            textView.text = text
+            charCount -= 1
+        }
+        // Update charCount label
+        charCountLabel.text = ("\(charCount)/140")
+    }
+    
     
     /*
     // MARK: - Navigation
