@@ -16,7 +16,7 @@ class TweetDetailViewController: UIViewController {
     @IBOutlet weak var tweetTextLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
-    
+    var delegate: TweetsViewController?
     override func viewDidLoad() {
         super.viewDidLoad()
         usernameLabel.text = "@\(tweet.username!)"
@@ -64,7 +64,7 @@ class TweetDetailViewController: UIViewController {
         if segue.identifier == "replySegue" {
             let navVC = segue.destination as! UINavigationController
             let destinationViewController = navVC.viewControllers.first as! ComposeViewController
-            
+            destinationViewController.delegate = self.delegate
             destinationViewController.replyToId = tweet.id 
             destinationViewController.replyToUser = tweet.username
         }

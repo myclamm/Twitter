@@ -175,7 +175,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Compose" id="Z5g-zV-7u0">
                             <connections>
-                                <segue destination="3Ne-0l-lSX" kind="modal" id="kdf-7m-YhG"/>
+                                <segue destination="3Ne-0l-lSX" kind="modal" identifier="composeSegue" id="kdf-7m-YhG"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -415,6 +415,6 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="P3P-eE-yaB"/>
+        <segue reference="kdf-7m-YhG"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -17,6 +17,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var tweetTextView: UITextView!
     var replyToId : Int?
     var replyToUser: String?
+    var delegate: TweetsViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +57,11 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
             self.tweetTextView.text = ""
             self.replyToId = nil
             self.replyToUser = nil
-            
+            // Update tweetsviewcontroller list of tweets
+            self.delegate!.updateTweets()
+            // Navigate back to home
+            let secondViewController = self.storyboard?.instantiateViewController(withIdentifier: "TweetsViewController") as! TweetsViewController
+            self.navigationController?.pushViewController(secondViewController, animated: true)
             }, failure: { (error: Error) in
                 print("error sending tweet: \(error)")
         })

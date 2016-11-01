@@ -21,16 +21,7 @@ class TweetsViewController: UIViewController {
         tableView.delegate = self;
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 85
-        TwitterClient.sharedInstance?.homeTimeLine(success: { (tweets: [Tweet]) -> () in
-            self.tweets = tweets
-            
-            for tweet in tweets {
-                self.tweets.append(tweet)
-            }
-            self.tableView.reloadData()
-        }, failure: { (error: Error)-> () in
-            print(error.localizedDescription)
-        })
+        updateTweets()
         
         
     }
@@ -42,6 +33,19 @@ class TweetsViewController: UIViewController {
     
     @IBAction func onLogoutButton(_ sender: AnyObject) {
         TwitterClient.sharedInstance?.logout()
+    }
+    
+    func updateTweets() {
+        TwitterClient.sharedInstance?.homeTimeLine(success: { (tweets: [Tweet]) -> () in
+            self.tweets = tweets
+            
+            for tweet in tweets {
+                self.tweets.append(tweet)
+            }
+            self.tableView.reloadData()
+            }, failure: { (error: Error)-> () in
+                print(error.localizedDescription)
+        })
     }
     
     func setupRefreshControl() {
@@ -74,7 +78,13 @@ class TweetsViewController: UIViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        if segue.identifier == "composeSegue" {
+
+            let navVC = segue.destination as! UINavigationController
+            let destinationViewController = navVC.viewControllers.first as! ComposeViewController
+            
+            destinationViewController.delegate = self
+        }
         
         if segue.identifier == "detailSegue" {
             let cell = sender as! TweetViewCell
@@ -83,6 +93,9 @@ class TweetsViewController: UIViewController {
             let destinationViewController = segue.destination as! TweetDetailViewController
             
             destinationViewController.tweet = selectedTweet
+            // Pass delegate, so that tweetdetailviewcontroller can later pass delegate to composeviewcontroller...there must be a better way to do this
+            destinationViewController.delegate = self
+            
         }
         
     }
