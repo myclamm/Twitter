@@ -12,6 +12,9 @@ class TweetDetailViewController: UIViewController {
 
     var tweet : Tweet!
     
+    @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var favoriteButton: UIButton!
+    @IBOutlet weak var replyButton: UIButton!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var tweetTextLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
@@ -37,9 +40,24 @@ class TweetDetailViewController: UIViewController {
     }
     
     @IBAction func onReplyButton(_ sender: AnyObject) {
+        UIView.animate(withDuration: 0, animations: {() -> () in
+            self.replyButton.alpha = 1
+        }) { (Bool) in
+            self.replyButton.alpha = 0.5
+        }
+        TwitterClient.sharedInstance?.reTweet(id: tweet.id!, success: {()->() in
+            print("Successful retweet!")
+            }, failure: {(error:Error)->() in
+                print("Failed to retweet: \(error)")
+        })
     }
     
     @IBAction func onFavoriteButton(_ sender: AnyObject) {
+        UIView.animate(withDuration: 0, animations: {() -> () in
+            self.favoriteButton.alpha = 1
+        }) { (Bool) in
+            self.favoriteButton.alpha = 0.5
+        }
         TwitterClient.sharedInstance?.favoriteTweet(id: tweet.id!, success: {()->() in
             print("Successfully favorited tweet!")
             }, failure: {(error:Error)->() in
@@ -48,6 +66,11 @@ class TweetDetailViewController: UIViewController {
     }
     
     @IBAction func onRetweetButton(_ sender: AnyObject) {
+        UIView.animate(withDuration: 0, animations: {() -> () in
+            self.retweetButton.alpha = 1
+        }) { (Bool) in
+            self.retweetButton.alpha = 0.5
+        }
         TwitterClient.sharedInstance?.reTweet(id: tweet.id!, success: {()->() in
             print("Successful retweet!")
             }, failure: {(error:Error)->() in
