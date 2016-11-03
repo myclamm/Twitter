@@ -208,7 +208,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vk4-ab-sze">
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vk4-ab-sze" customClass="TwitterButton" customModule="Twitter" customModuleProvider="target">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="Bxb-tI-hyv"/>
                                     <constraint firstAttribute="height" constant="20" id="pFb-TV-FFw"/>
@@ -219,7 +219,7 @@
                                     <segue destination="3Ne-0l-lSX" kind="modal" identifier="replySegue" id="P3P-eE-yaB"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eUR-hU-rli">
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eUR-hU-rli" customClass="TwitterButton" customModule="Twitter" customModuleProvider="target">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="DN2-Xp-Zgg"/>
                                     <constraint firstAttribute="width" constant="20" id="QUU-cE-yQY"/>
@@ -229,7 +229,7 @@
                                     <action selector="onFavoriteButton:" destination="GvZ-z5-6xh" eventType="touchUpInside" id="OL4-sU-ge3"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MtD-Pe-BXF">
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MtD-Pe-BXF" customClass="TwitterButton" customModule="Twitter" customModuleProvider="target">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="eLt-PG-x23"/>
                                     <constraint firstAttribute="width" constant="20" id="mdN-6k-DPg"/>
@@ -278,11 +278,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="5MS-Yn-tOj"/>
                     <connections>
-                        <outlet property="favoriteButton" destination="eUR-hU-rli" id="a85-u7-vXz"/>
                         <outlet property="nameLabel" destination="o4Z-V4-lu8" id="Rli-5u-Eau"/>
                         <outlet property="profileImageView" destination="5cc-CX-A2O" id="MaU-En-B1t"/>
-                        <outlet property="replyButton" destination="vk4-ab-sze" id="OBf-Pi-pTN"/>
-                        <outlet property="retweetButton" destination="MtD-Pe-BXF" id="Wx8-KH-msJ"/>
                         <outlet property="tweetTextLabel" destination="VvB-aU-NTn" id="Xdl-QK-xBw"/>
                         <outlet property="usernameLabel" destination="4ew-Ik-nFP" id="qNz-FO-od3"/>
                     </connections>
@@ -416,6 +413,6 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="kdf-7m-YhG"/>
+        <segue reference="P3P-eE-yaB"/>
     </inferredMetricsTieBreakers>
 </document>
