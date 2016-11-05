@@ -11,12 +11,21 @@ import UIKit
 class TweetsViewController: UIViewController {
     var tweets: [Tweet]! = []
     
+    @IBOutlet weak var statsView: UIView!
+    @IBOutlet weak var headerFollowersLabel: UILabel!
+    @IBOutlet weak var headerFollowingLabel: UILabel!
+    @IBOutlet weak var headerTweetsLabel: UILabel!
+    @IBOutlet weak var headerNameLabel: UILabel!
+    @IBOutlet weak var headerScreenNameLabel: UILabel!
+    @IBOutlet weak var headerImageView: UIImageView!
+    @IBOutlet weak var headerProfileImageView: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     var refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupRefreshControl()
+        setupHeaderView()
         tableView.dataSource = self;
         tableView.delegate = self;
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -49,12 +58,37 @@ class TweetsViewController: UIViewController {
     }
     
     func setupRefreshControl() {
-        
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self,
                                  action: #selector(refreshControlAction(refreshControl:)),
                                  for: UIControlEvents.valueChanged)
         tableView.insertSubview(refreshControl, at: 0)
+    }
+    
+    func setupHeaderView() {
+        statsView.layer.borderWidth = 1
+        statsView.layer.borderColor = UIColor.gray.cgColor
+        headerNameLabel.text = User.currentUser?.name!
+        headerNameLabel.layer.zPosition = 1
+        headerScreenNameLabel.text = "@\((User.currentUser?.screenname!)!)"
+        headerScreenNameLabel.layer.zPosition = 1
+        
+        headerTweetsLabel.text = String((User.currentUser?.tweetCount)! as Int)
+        headerFollowersLabel.text = String((User.currentUser?.followersCount)! as Int)
+        headerFollowingLabel.text = String((User.currentUser?.followingCount)! as Int)
+        
+        if let profileImageURL = User.currentUser?.profileUrl {
+            headerProfileImageView.setImageWith(profileImageURL)
+            headerProfileImageView.layer.zPosition = 1
+        } else {
+            headerProfileImageView.image = nil
+        }
+        
+        if let headerImageURL = User.currentUser?.headerPicUrl {
+            headerImageView.setImageWith(headerImageURL)
+        } else {
+            headerImageView.image = nil
+        }
     }
     
     func refreshControlAction(refreshControl: UIRefreshControl) {

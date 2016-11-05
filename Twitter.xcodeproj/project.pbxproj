@@ -80,6 +80,7 @@
 			children = (
 				945EA2F21DC823580062802D /* Twitter.entitlements */,
 				94DF92251DCAD3340059A1F9 /* API */,
+				94DF92281DCAD4EB0059A1F9 /* Buttons */,
 				945EA2EF1DC802460062802D /* Views */,
 				945EA2E51DC6C26D0062802D /* View Controllers */,
 				945EA2E41DC6C2680062802D /* Models */,
@@ -116,7 +117,6 @@
 			isa = PBXGroup;
 			children = (
 				945EA2F01DC8026F0062802D /* TweetViewCell.swift */,
-				94DF92231DCAD2B40059A1F9 /* TwitterButton.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -127,6 +127,14 @@
 				94DF92261DCAD3440059A1F9 /* TwitterClient.swift */,
 			);
 			name = API;
+			sourceTree = "<group>";
+		};
+		94DF92281DCAD4EB0059A1F9 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				94DF92231DCAD2B40059A1F9 /* TwitterButton.swift */,
+			);
+			name = Buttons;
 			sourceTree = "<group>";
 		};
 		C111AC2DC666A81E1CE201EB /* Frameworks */ = {
