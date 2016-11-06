@@ -16,6 +16,7 @@ class TweetDetailViewController: UIViewController {
     @IBOutlet weak var tweetTextLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
+    var selectedProfileId: Int?
     var delegate: TweetsViewController?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +65,7 @@ class TweetDetailViewController: UIViewController {
         })
     }
 
-    
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation

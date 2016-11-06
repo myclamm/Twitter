@@ -17,6 +17,7 @@ class Tweet: NSObject {
     var username: String?
     var name: String?
     var id: Int?
+    var profileId: Int?
     
     init(dictionary: NSDictionary) {
         text = dictionary["text"] as? String
@@ -32,7 +33,7 @@ class Tweet: NSObject {
         if let profileImageString = profileImageString {
             profileImageURL = URL(string:profileImageString)
         }
-        
+        profileId = user?["id"] as? Int
         username = user?["screen_name"] as? String
         name = user?["name"] as? String
         

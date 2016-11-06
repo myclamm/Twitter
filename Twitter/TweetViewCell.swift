@@ -15,7 +15,8 @@ class TweetViewCell: UITableViewCell {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
-    
+    var profileId: Int?
+    var delegate: TweetsViewController?
     
     var tweet: Tweet! {
         didSet {
@@ -29,6 +30,11 @@ class TweetViewCell: UITableViewCell {
             usernameLabel.text = "@\(tweet.username!)"
             timestampLabel.text = tweet.timestamp
             nameLabel.text = tweet.name
+            profileId = tweet.profileId
+            
+            let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(profileTapped))
+            profileImageView.isUserInteractionEnabled = true
+            profileImageView.addGestureRecognizer(tapGestureRecognizer)
         }
     }
     
@@ -43,4 +49,10 @@ class TweetViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    func profileTapped(){
+        
+        delegate?.selectedProfileId = profileId
+        
+        delegate?.performSegue(withIdentifier: "profileViewSegue", sender: delegate)
+    }
 }

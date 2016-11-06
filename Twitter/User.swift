@@ -19,10 +19,12 @@ class User: NSObject {
     var followersCount: Int?
     static let userDidLogoutNotification = NSNotification.Name(rawValue: "UserDidLogout")
     var dictionary: NSDictionary?
+    var id: Int?
     
     init(dictionary: NSDictionary) {
         self.dictionary = dictionary
         // Deserialization of dictionary
+        id = dictionary["id"] as? Int
         name = dictionary["name"] as? String
         screenname = dictionary["screen_name"] as? String
         tagline = dictionary["description"] as? String

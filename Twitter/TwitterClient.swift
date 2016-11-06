@@ -79,10 +79,8 @@ class TwitterClient: BDBOAuth1SessionManager {
     // Give this one optional succes and failure callbacks
     func currentAccount(success: @escaping (User)->(), failure: @escaping (Error)->()) {
         get("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask?, response: Any?) -> Void in
-            
             let userDictionary = response as! NSDictionary
             let user = User(dictionary: userDictionary)
-            print("userDictionary: \(userDictionary)")
             success(user)
             
             }, failure: { (task: URLSessionDataTask?, error: Error) -> Void in
@@ -117,5 +115,31 @@ class TwitterClient: BDBOAuth1SessionManager {
                 failure(error)
         }
     }
+    
+    func getUserProfile(id: Int, success: @escaping (_ res: Any?)->(), failure: @escaping (Error)->()) {
+        get("1.1/users/lookup.json?user_id=\(id)", parameters: nil, progress: nil, success: { (task: URLSessionDataTask?, response: Any?) in
+            let response = response as! NSArray
+            let userDictionary = response[0] as! NSDictionary
+            let user = User(dictionary: userDictionary)
+            success(user)
+
+        }, failure: {(task: URLSessionDataTask?, error: Error) in
+            failure(error)
+        })
+    }
+    
+    func getUserTweets(id: Int, success: @escaping (_ res: [Tweet])->(), failure: @escaping (Error)->()) {
+        get("1.1/statuses/user_timeline.json?user_id=\(id)", parameters: nil, progress: nil, success: { (task: URLSessionDataTask?, response: Any?) in
+            let dictionaries = response as! [NSDictionary]
+            
+            let tweets = Tweet.tweetsWithArray(dictionaries: dictionaries)
+            success(tweets)
+            
+            }, failure: {(task: URLSessionDataTask?, error: Error) in
+                failure(error)
+        })
+    }
+    
+    
     
 }
