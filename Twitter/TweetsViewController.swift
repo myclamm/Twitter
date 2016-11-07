@@ -144,11 +144,12 @@ class TweetsViewController: UIViewController {
             
             destinationViewController.delegate = self
         }
-        
+
         if segue.identifier == "detailSegue" {
             let cell = sender as! TweetViewCell
             let indexPath = tableView.indexPath(for: cell)
             let selectedTweet = self.tweets[(indexPath?.row)!]
+            
             let destinationViewController = segue.destination as! TweetDetailViewController
             
             destinationViewController.tweet = selectedTweet
@@ -158,6 +159,7 @@ class TweetsViewController: UIViewController {
         }
         
         if segue.identifier == "profileViewSegue" {
+            print("about to segue")
             let destinationViewController = segue.destination as! ProfileViewController
             TwitterClient.sharedInstance?.getUserProfile(id: selectedProfileId!, success: { (response: Any?) in
                 let user = response as! User
@@ -235,7 +237,7 @@ extension TweetsViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == self.menuTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MenuViewCell", for: indexPath) as! MenuViewCell
-            cell.titleLabel.text = "Yay"
+            cell.titleLabel.text = self.menuTitles[indexPath.row]
             return cell
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetViewCell", for: indexPath) as! TweetViewCell
@@ -255,12 +257,53 @@ extension TweetsViewController : UITableViewDelegate {
             
             if(self.menuTitles[indexPath.row] == "Compose") {
                 performSegue(withIdentifier: "composeSegue", sender: self)
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.leftMarginConstraint.constant = 0
+                })
                 return
             }
             if (self.menuTitles[indexPath.row] == "Profile") {
-                self.selectedProfileId = User.currentUser?.id!
+                /*self.selectedProfileId = User.currentUser?.id!
                 performSegue(withIdentifier: "profileViewSegue", sender: self)
                 return
+                */
+                self.selectedProfileId = User.currentUser?.id!
+                let destinationViewController = self.storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+                TwitterClient.sharedInstance?.getUserProfile(id: selectedProfileId!, success: { (response: Any?) in
+                    let user = response as! User
+                    destinationViewController.user = user
+                    print("User: \(user)")
+                    print("User name: \(user.name)")
+                    
+                    destinationViewController.headerNameLabel.text = user.name!
+                    destinationViewController.headerNameLabel.layer.zPosition = 1
+                    destinationViewController.headerScreenNameLabel.text = "@\((user.screenname!))"
+                    destinationViewController.headerScreenNameLabel.layer.zPosition = 1
+                    
+                    destinationViewController.tweetCountLabel.text = String((user.tweetCount)! as Int)
+                    destinationViewController.followerCountLabel.text = String((user.followersCount)! as Int)
+                    
+                    if let profileImageURL = user.profileUrl {
+                        destinationViewController.headerProfileImageView.setImageWith(profileImageURL)
+                        destinationViewController.headerProfileImageView.layer.zPosition = 1
+                    } else {
+                        destinationViewController.headerProfileImageView.image = nil
+                    }
+                    
+                    if let headerImageURL = user.headerPicUrl {
+                        destinationViewController.headerImageView.setImageWith(headerImageURL)
+                    } else {
+                        destinationViewController.headerImageView.image = nil
+                    }
+                    
+                    
+                    }, failure: { (error: Error) in
+                        print("error: \(error)")
+                })
+                self.navigationController?.pushViewController(destinationViewController, animated: true)
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.leftMarginConstraint.constant = 0
+                })
             }
             
         }
