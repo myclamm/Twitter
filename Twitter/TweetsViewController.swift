@@ -21,30 +21,18 @@ class TweetsViewController: UIViewController {
     @IBOutlet weak var headerProfileImageView: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     
-    var menuTitles = ["Profile","Timeline","Mentions", "Compose"]
-    var menuKey = [
-        "Compose": "composeSegue",
-        "Profile": "profileViewSegue"
-    ]
-    @IBOutlet weak var menuTableView: UITableView!
-    // Set when user clicks a tweet profile image
+
     var selectedProfileId: Int!
     
     
     var refreshControl = UIRefreshControl()
     
-    // Hamburger Menu
-    @IBOutlet weak var leftMarginConstraint: NSLayoutConstraint!
-    @IBOutlet weak var menuView: UIView!
-    @IBOutlet weak var contentView: UIView!
-    var originalLeftMargin: CGFloat!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupRefreshControl()
         setupHeaderView()
-        menuTableView.dataSource = self
-        menuTableView.delegate = self
         tableView.dataSource = self;
         tableView.delegate = self;
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -164,8 +152,6 @@ class TweetsViewController: UIViewController {
             TwitterClient.sharedInstance?.getUserProfile(id: selectedProfileId!, success: { (response: Any?) in
                 let user = response as! User
                 destinationViewController.user = user
-                print("User: \(user)")
-                print("User name: \(user.name)")
                 
                 destinationViewController.headerNameLabel.text = user.name!
                 destinationViewController.headerNameLabel.layer.zPosition = 1
@@ -198,28 +184,6 @@ class TweetsViewController: UIViewController {
         
     }
 
-    @IBAction func panGesture(_ sender: UIPanGestureRecognizer) {
-        print("panning!")
-        let translation = sender.translation(in:view)
-        let velocity = sender.velocity(in: view)
-        
-        if sender.state == UIGestureRecognizerState.began {
-            originalLeftMargin = leftMarginConstraint.constant
-            
-        } else if sender.state == UIGestureRecognizerState.changed {
-            leftMarginConstraint.constant = originalLeftMargin + translation.x
-        } else if sender.state == UIGestureRecognizerState.ended {
-            UIView.animate(withDuration: 0.3, animations: { 
-                if velocity.x > 0 {
-                    self.leftMarginConstraint.constant = self.view.frame.size.width - 50
-                } else {
-                    self.leftMarginConstraint.constant = 0
-                }
-                self.view.layoutIfNeeded()
-            })
-            
-        }
-    }
 
 }
 
@@ -228,18 +192,11 @@ class TweetsViewController: UIViewController {
 extension TweetsViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows
-        if tableView == self.menuTableView {
-            return self.menuTitles.count
-        }
         return self.tweets.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if tableView == self.menuTableView {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MenuViewCell", for: indexPath) as! MenuViewCell
-            cell.titleLabel.text = self.menuTitles[indexPath.row]
-            return cell
-        }
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetViewCell", for: indexPath) as! TweetViewCell
         let tweet = self.tweets[indexPath.row]
         cell.delegate = self
@@ -252,71 +209,8 @@ extension TweetsViewController : UITableViewDataSource {
 extension TweetsViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView == self.menuTableView {
-            print(self.menuTitles[indexPath.row])
-            if(self.menuTitles[indexPath.row] == "Timeline") {
-                
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.leftMarginConstraint.constant = 0
-                })
-                return
-            }
-            if(self.menuTitles[indexPath.row] == "Mentions") {
-                performSegue(withIdentifier: "mentionsSegue", sender: self)
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.leftMarginConstraint.constant = 0
-                })
-                return
-            }
-            if(self.menuTitles[indexPath.row] == "Compose") {
-                
-                performSegue(withIdentifier: "composeSegue", sender: self)
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.leftMarginConstraint.constant = 0
-                })
-                return
-            }
-            if (self.menuTitles[indexPath.row] == "Profile") {
-                self.selectedProfileId = User.currentUser?.id!
-                let destinationViewController = self.storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
-                TwitterClient.sharedInstance?.getUserProfile(id: selectedProfileId!, success: { (response: Any?) in
-                    let user = response as! User
-                    destinationViewController.user = user
-                    print("User: \(user)")
-                    print("User name: \(user.name)")
-                    
-                    destinationViewController.headerNameLabel.text = user.name!
-                    destinationViewController.headerNameLabel.layer.zPosition = 1
-                    destinationViewController.headerScreenNameLabel.text = "@\((user.screenname!))"
-                    destinationViewController.headerScreenNameLabel.layer.zPosition = 1
-                    
-                    destinationViewController.tweetCountLabel.text = String((user.tweetCount)! as Int)
-                    destinationViewController.followerCountLabel.text = String((user.followersCount)! as Int)
-                    
-                    if let profileImageURL = user.profileUrl {
-                        destinationViewController.headerProfileImageView.setImageWith(profileImageURL)
-                        destinationViewController.headerProfileImageView.layer.zPosition = 1
-                    } else {
-                        destinationViewController.headerProfileImageView.image = nil
-                    }
-                    
-                    if let headerImageURL = user.headerPicUrl {
-                        destinationViewController.headerImageView.setImageWith(headerImageURL)
-                    } else {
-                        destinationViewController.headerImageView.image = nil
-                    }
-                    
-                    
-                    }, failure: { (error: Error) in
-                        print("error: \(error)")
-                })
-                self.navigationController?.pushViewController(destinationViewController, animated: true)
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.leftMarginConstraint.constant = 0
-                })
-            }
+        
             
         }
     }
     
-}

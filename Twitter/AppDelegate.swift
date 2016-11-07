@@ -18,13 +18,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        let storyboard = UIStoryboard(name:"Main",bundle:nil)
+        
+        let hamburgerViewController = storyboard.instantiateViewController(withIdentifier: "HamburgerViewController") as! HamburgerViewController
+        
         if User.currentUser != nil {
             // Segue to tweets screen
             print("There is a current user")
-            
-            let storyboard = UIStoryboard(name:"Main",bundle:nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "TweetsNavigationController")
-            window?.rootViewController = vc
+            //let vc = storyboard.instantiateViewController(withIdentifier: "TweetsNavigationController")
+            window?.rootViewController = hamburgerViewController
             
         }
         
@@ -34,6 +36,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let vc = storyboard.instantiateInitialViewController()
             self.window?.rootViewController = vc
         }
+        // reference to hamburgerViewController
+        //let hamburgerViewController = vc.topViewController as! HamburgerViewController
+        
+        // Create menuViewController
+        let listMenuViewController = storyboard.instantiateViewController(withIdentifier: "ListMenuViewController") as! ListMenuViewController
+        
+        
+        listMenuViewController.hamburgerViewController = hamburgerViewController
+        hamburgerViewController.listMenuViewController = listMenuViewController
         
         return true
     }
