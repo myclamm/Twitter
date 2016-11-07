@@ -28,9 +28,12 @@ class ListMenuViewController: UIViewController {
         
         let TweetsViewNavigationController = storyboard.instantiateViewController(withIdentifier: "TweetsViewNavigationController")
         let MentionsViewNavigationController = storyboard.instantiateViewController(withIdentifier: "MentionsNavigationController")
+        let ProfileViewController = storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+        ProfileViewController.user = User.currentUser
         
         viewControllers.append(TweetsViewNavigationController)
         viewControllers.append(MentionsViewNavigationController)
+        viewControllers.append(ProfileViewController)
         
         // Initialize hamburgerView with Tweets View
         hamburgerViewController.contentViewController = TweetsViewNavigationController

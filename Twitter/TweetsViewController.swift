@@ -152,8 +152,6 @@ class TweetsViewController: UIViewController {
             TwitterClient.sharedInstance?.getUserProfile(id: selectedProfileId!, success: { (response: Any?) in
                 let user = response as! User
                 destinationViewController.user = user
-                print("User: \(user)")
-                print("User name: \(user.name)")
                 
                 destinationViewController.headerNameLabel.text = user.name!
                 destinationViewController.headerNameLabel.layer.zPosition = 1

@@ -22,6 +22,29 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     override func viewDidAppear(_ animated: Bool) {
+        
+        headerNameLabel.text = user.name!
+        headerNameLabel.layer.zPosition = 1
+        headerScreenNameLabel.text = "@\((user.screenname!))"
+        headerScreenNameLabel.layer.zPosition = 1
+        
+        tweetCountLabel.text = String((user.tweetCount)! as Int)
+        followerCountLabel.text = String((user.followersCount)! as Int)
+        
+        if let profileImageURL = user.profileUrl {
+            headerProfileImageView.setImageWith(profileImageURL)
+            headerProfileImageView.layer.zPosition = 1
+        } else {
+            headerProfileImageView.image = nil
+        }
+        
+        if let headerImageURL = user.headerPicUrl {
+            headerImageView.setImageWith(headerImageURL)
+        } else {
+            headerImageView.image = nil
+        }
+        
+        
         TwitterClient.sharedInstance?.getUserTweets(id: user.id!, success: { (response: [Tweet]) in
             print("tweets: \(response)")
             self.tweets = response
