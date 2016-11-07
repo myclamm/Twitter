@@ -10,7 +10,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="BYZ-38-t0r" customClass="LoginViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -35,6 +35,7 @@
                     </view>
                     <connections>
                         <segue destination="73n-D1-q9N" kind="modal" identifier="loginSegue" id="Uh7-Ja-mX2"/>
+                        <segue destination="5F1-SX-rWz" kind="modal" identifier="loginHamburgerSegue" id="zW6-Qb-Vvz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -175,7 +176,108 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZiP-iA-fT9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1739.5" y="968.5"/>
+            <point key="canvasLocation" x="1930.5" y="1841.5"/>
+        </scene>
+        <!--Hamburger View Controller-->
+        <scene sceneID="CSf-Pe-8y5">
+            <objects>
+                <viewController storyboardIdentifier="HamburgerViewController" id="5F1-SX-rWz" customClass="HamburgerViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="YtB-CT-bVj"/>
+                        <viewControllerLayoutGuide type="bottom" id="yyo-0C-sce"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NhV-UB-bgA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Gi-Us-lLf" userLabel="Menu View">
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cc4-4P-p5o" userLabel="Content View">
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="F9r-75-Tkz" appends="YES" id="Jht-Xq-gh7"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Cc4-4P-p5o" firstAttribute="top" secondItem="NhV-UB-bgA" secondAttribute="top" id="7LK-gJ-Gwn"/>
+                            <constraint firstAttribute="trailing" secondItem="5Gi-Us-lLf" secondAttribute="trailing" id="COg-dK-kn2"/>
+                            <constraint firstItem="yyo-0C-sce" firstAttribute="top" secondItem="Cc4-4P-p5o" secondAttribute="bottom" id="Ep9-sH-nAY"/>
+                            <constraint firstItem="Cc4-4P-p5o" firstAttribute="width" secondItem="NhV-UB-bgA" secondAttribute="width" id="UHZ-tl-kFd"/>
+                            <constraint firstItem="5Gi-Us-lLf" firstAttribute="top" secondItem="NhV-UB-bgA" secondAttribute="top" id="UZv-vG-r53"/>
+                            <constraint firstItem="yyo-0C-sce" firstAttribute="top" secondItem="5Gi-Us-lLf" secondAttribute="bottom" id="jUs-zM-UQA"/>
+                            <constraint firstItem="5Gi-Us-lLf" firstAttribute="leading" secondItem="NhV-UB-bgA" secondAttribute="leading" id="lsA-fl-tL5"/>
+                            <constraint firstItem="Cc4-4P-p5o" firstAttribute="leading" secondItem="NhV-UB-bgA" secondAttribute="leading" id="tON-qT-zFB"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="jxA-Tb-Lco"/>
+                    <connections>
+                        <outlet property="contentView" destination="Cc4-4P-p5o" id="Jli-tD-MrK"/>
+                        <outlet property="leftMarginConstraint" destination="tON-qT-zFB" id="Ev4-zL-FuM"/>
+                        <outlet property="menuView" destination="5Gi-Us-lLf" id="oL8-Bt-TpU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VbH-uU-9Jy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="F9r-75-Tkz">
+                    <connections>
+                        <action selector="onPanGesture:" destination="5F1-SX-rWz" id="q9d-7u-UyJ"/>
+                    </connections>
+                </panGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1344" y="-775"/>
+        </scene>
+        <!--List Menu View Controller-->
+        <scene sceneID="Iht-1Z-FhC">
+            <objects>
+                <viewController storyboardIdentifier="ListMenuViewController" id="rvq-Wa-3p7" customClass="ListMenuViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="AfQ-Ac-ts3"/>
+                        <viewControllerLayoutGuide type="bottom" id="Gw1-fL-2Q4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EFV-BK-gdL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="67" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ADD-nd-Sxb">
+                                <frame key="frameInset" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListMenuViewCell" rowHeight="67" id="8UZ-NY-jr0" customClass="MenuViewCell" customModule="Twitter" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="67"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8UZ-NY-jr0" id="NgF-3A-X81">
+                                            <frame key="frameInset" width="375" height="66"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gE7-xg-gIO">
+                                                    <frame key="frameInset" minX="104" minY="23" width="167" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="titleLabel" destination="gE7-xg-gIO" id="fuu-Ng-QuC"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="ADD-nd-Sxb" id="LpV-Qw-5PI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gal-6H-rsf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1840" y="-776"/>
         </scene>
         <!--Home-->
         <scene sceneID="bTt-B8-90Z">
@@ -189,38 +291,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JEE-03-hut" userLabel="Menu View">
-                                <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uik-7v-bxD">
-                                        <frame key="frameInset" width="375" height="667"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MenuViewCell" id="QUl-p0-udY" customClass="MenuViewCell" customModule="Twitter" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QUl-p0-udY" id="gab-fK-SPN">
-                                                    <frame key="frameInset" width="375" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="COMPOSE" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x4W-iI-axL">
-                                                            <frame key="frameInset" minX="23" minY="11" width="228" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </tableViewCellContentView>
-                                                <connections>
-                                                    <outlet property="titleLabel" destination="x4W-iI-axL" id="SSG-KQ-6FG"/>
-                                                </connections>
-                                            </tableViewCell>
-                                        </prototypes>
-                                    </tableView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l4I-mp-5xL" userLabel="Content View">
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="idL-gu-LcL" userLabel="Header View">
@@ -417,22 +487,15 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="yvH-sE-tAm" appends="YES" id="9lD-Wr-ZCc"/>
-                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="l4I-mp-5xL" firstAttribute="width" secondItem="psj-6v-OfK" secondAttribute="width" id="0il-js-DbE"/>
-                            <constraint firstAttribute="trailing" secondItem="JEE-03-hut" secondAttribute="trailing" id="8ng-z1-S5d"/>
-                            <constraint firstItem="JEE-03-hut" firstAttribute="leading" secondItem="psj-6v-OfK" secondAttribute="leading" id="IUb-f0-A1h"/>
                             <constraint firstItem="l4I-mp-5xL" firstAttribute="leading" secondItem="psj-6v-OfK" secondAttribute="leading" id="KTW-sA-2ua"/>
                             <constraint firstItem="l4I-mp-5xL" firstAttribute="top" secondItem="psj-6v-OfK" secondAttribute="top" id="bes-wE-Iv0"/>
-                            <constraint firstItem="JEE-03-hut" firstAttribute="top" secondItem="psj-6v-OfK" secondAttribute="top" id="eNa-wD-85c"/>
                             <constraint firstItem="pGA-2N-Oiw" firstAttribute="top" secondItem="l4I-mp-5xL" secondAttribute="bottom" id="fCd-uq-0bF"/>
-                            <constraint firstItem="pGA-2N-Oiw" firstAttribute="top" secondItem="JEE-03-hut" secondAttribute="bottom" id="fM4-XG-7k0"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="gBu-11-tKq">
@@ -455,23 +518,14 @@
                         <outlet property="headerProfileImageView" destination="XxI-rM-g0v" id="6zt-9a-vcX"/>
                         <outlet property="headerScreenNameLabel" destination="8Lz-1g-Td6" id="oq7-Y5-P4N"/>
                         <outlet property="headerTweetsLabel" destination="oWi-oe-RNn" id="uOL-b8-6IK"/>
-                        <outlet property="leftMarginConstraint" destination="KTW-sA-2ua" id="BuH-Su-OPj"/>
-                        <outlet property="menuTableView" destination="uik-7v-bxD" id="Lbm-VW-lmP"/>
-                        <outlet property="menuView" destination="JEE-03-hut" id="2Xe-G4-pED"/>
                         <outlet property="statsView" destination="6dm-Cx-I7C" id="BpN-ZG-GWv"/>
                         <outlet property="tableView" destination="iKr-Pk-NLR" id="asC-Fc-IKy"/>
                         <segue destination="JV8-I4-HcZ" kind="push" identifier="profileViewSegue" id="16Q-hq-Xhp"/>
-                        <segue destination="Wut-tm-ow4" kind="push" identifier="mentionsSegue" id="Xuu-G5-sbY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xAG-ev-Vnw" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="yvH-sE-tAm">
-                    <connections>
-                        <action selector="panGesture:" destination="1Nc-oh-MOq" id="LGZ-lz-7o9"/>
-                    </connections>
-                </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1180.5" y="152.5"/>
+            <point key="canvasLocation" x="1767.5" y="152.5"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="gSk-mw-FyD">
@@ -699,7 +753,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3NH-Fu-5UE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="682.5" y="968.5"/>
+            <point key="canvasLocation" x="1344" y="1061"/>
         </scene>
         <!--Tweet Detail View Controller-->
         <scene sceneID="G9R-SM-uz7">
@@ -803,7 +857,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tia-W0-JUV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1180.5" y="968.5"/>
+            <point key="canvasLocation" x="1768" y="1061"/>
         </scene>
         <!--ComposeViewController-->
         <scene sceneID="WcU-0T-7An">
@@ -870,7 +924,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vgm-k2-jRF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2348.5" y="148.5"/>
+            <point key="canvasLocation" x="2935.5" y="148.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1Xg-8x-SQb">
@@ -888,12 +942,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="1Nc-oh-MOq" kind="relationship" relationship="rootViewController" id="PEr-gU-uRj"/>
+                        <segue destination="5F1-SX-rWz" kind="modal" identifier="hamburgerSegue" id="Cuh-r3-VQu"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C0V-KM-hWJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="593.5" y="152.5"/>
+            <point key="canvasLocation" x="622" y="-756"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Jar-Qc-XLa">
@@ -916,7 +970,43 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ity-ue-R1q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1761.5" y="148.5"/>
+            <point key="canvasLocation" x="2348.5" y="148.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="5BR-ry-GKb">
+            <objects>
+                <navigationController storyboardIdentifier="TweetsViewNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="7SM-4g-fHE" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6d2-cT-vQm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="1Nc-oh-MOq" kind="relationship" relationship="rootViewController" id="P2L-bq-y4p"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="26I-08-Onn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1180.5" y="152.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="8Ob-dM-HAD">
+            <objects>
+                <navigationController storyboardIdentifier="MentionsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="ULT-3k-iFQ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ps3-Ou-4dk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Wut-tm-ow4" kind="relationship" relationship="rootViewController" id="zGR-eU-ivh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mEI-JP-JrI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1343.5" y="1841.5"/>
         </scene>
     </scenes>
     <resources>
@@ -930,6 +1020,7 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="P3P-eE-yaB"/>
+        <segue reference="Cuh-r3-VQu"/>
+        <segue reference="kdf-7m-YhG"/>
     </inferredMetricsTieBreakers>
 </document>

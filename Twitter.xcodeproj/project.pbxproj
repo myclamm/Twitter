@@ -10,6 +10,8 @@
 		94113C141DD010AD004FA399 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94113C131DD010AD004FA399 /* MenuViewController.swift */; };
 		94113C161DD015EE004FA399 /* MenuViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94113C151DD015EE004FA399 /* MenuViewCell.swift */; };
 		94113C181DD02609004FA399 /* MentionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94113C171DD02609004FA399 /* MentionsViewController.swift */; };
+		9431B0FE1DD052D000F0CE8F /* HamburgerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9431B0FD1DD052D000F0CE8F /* HamburgerViewController.swift */; };
+		9431B1001DD05A8A00F0CE8F /* ListMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9431B0FF1DD05A8A00F0CE8F /* ListMenuViewController.swift */; };
 		945EA2D31DC69E550062802D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945EA2D21DC69E550062802D /* AppDelegate.swift */; };
 		945EA2D51DC69E550062802D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945EA2D41DC69E550062802D /* LoginViewController.swift */; };
 		945EA2DA1DC69E550062802D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 945EA2D91DC69E550062802D /* Assets.xcassets */; };
@@ -33,6 +35,8 @@
 		94113C131DD010AD004FA399 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		94113C151DD015EE004FA399 /* MenuViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewCell.swift; sourceTree = "<group>"; };
 		94113C171DD02609004FA399 /* MentionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionsViewController.swift; sourceTree = "<group>"; };
+		9431B0FD1DD052D000F0CE8F /* HamburgerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HamburgerViewController.swift; sourceTree = "<group>"; };
+		9431B0FF1DD05A8A00F0CE8F /* ListMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListMenuViewController.swift; sourceTree = "<group>"; };
 		945EA2CF1DC69E550062802D /* Twitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Twitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		945EA2D21DC69E550062802D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		945EA2D41DC69E550062802D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +124,8 @@
 				94DD582C1DCE6BDE009BB0E7 /* ProfileViewController.swift */,
 				94113C131DD010AD004FA399 /* MenuViewController.swift */,
 				94113C171DD02609004FA399 /* MentionsViewController.swift */,
+				9431B0FD1DD052D000F0CE8F /* HamburgerViewController.swift */,
+				9431B0FF1DD05A8A00F0CE8F /* ListMenuViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -298,9 +304,11 @@
 				94DF92271DCAD3440059A1F9 /* TwitterClient.swift in Sources */,
 				945EA2D51DC69E550062802D /* LoginViewController.swift in Sources */,
 				945EA2FA1DC857DF0062802D /* TweetDetailViewController.swift in Sources */,
+				9431B0FE1DD052D000F0CE8F /* HamburgerViewController.swift in Sources */,
 				945EA2D31DC69E550062802D /* AppDelegate.swift in Sources */,
 				94113C161DD015EE004FA399 /* MenuViewCell.swift in Sources */,
 				94113C181DD02609004FA399 /* MentionsViewController.swift in Sources */,
+				9431B1001DD05A8A00F0CE8F /* ListMenuViewController.swift in Sources */,
 				945EA2F81DC834070062802D /* ComposeViewController.swift in Sources */,
 				945EA2EE1DC717CC0062802D /* TweetsViewController.swift in Sources */,
 				94DD582D1DCE6BDE009BB0E7 /* ProfileViewController.swift in Sources */,
