@@ -21,16 +21,30 @@ class TweetsViewController: UIViewController {
     @IBOutlet weak var headerProfileImageView: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     
+    var menuTitles = ["Profile","Compose"]
+    var menuKey = [
+        "Compose": "composeSegue",
+        "Profile": "profileViewSegue"
+    ]
+    @IBOutlet weak var menuTableView: UITableView!
     // Set when user clicks a tweet profile image
     var selectedProfileId: Int!
     
     
     var refreshControl = UIRefreshControl()
     
+    // Hamburger Menu
+    @IBOutlet weak var leftMarginConstraint: NSLayoutConstraint!
+    @IBOutlet weak var menuView: UIView!
+    @IBOutlet weak var contentView: UIView!
+    var originalLeftMargin: CGFloat!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupRefreshControl()
         setupHeaderView()
+        menuTableView.dataSource = self
+        menuTableView.delegate = self
         tableView.dataSource = self;
         tableView.delegate = self;
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -181,6 +195,30 @@ class TweetsViewController: UIViewController {
         }
         
     }
+
+    @IBAction func panGesture(_ sender: UIPanGestureRecognizer) {
+        print("panning!")
+        let translation = sender.translation(in:view)
+        let velocity = sender.velocity(in: view)
+        
+        if sender.state == UIGestureRecognizerState.began {
+            originalLeftMargin = leftMarginConstraint.constant
+            
+        } else if sender.state == UIGestureRecognizerState.changed {
+            leftMarginConstraint.constant = originalLeftMargin + translation.x
+        } else if sender.state == UIGestureRecognizerState.ended {
+            UIView.animate(withDuration: 0.3, animations: { 
+                if velocity.x > 0 {
+                    self.leftMarginConstraint.constant = self.view.frame.size.width - 50
+                } else {
+                    self.leftMarginConstraint.constant = 0
+                }
+                self.view.layoutIfNeeded()
+            })
+            
+        }
+    }
+
 }
 
 // MARK: - UITableViewDataSource
@@ -188,11 +226,18 @@ class TweetsViewController: UIViewController {
 extension TweetsViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows
+        if tableView == self.menuTableView {
+            return self.menuTitles.count
+        }
         return self.tweets.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        if tableView == self.menuTableView {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MenuViewCell", for: indexPath) as! MenuViewCell
+            cell.titleLabel.text = "Yay"
+            return cell
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetViewCell", for: indexPath) as! TweetViewCell
         let tweet = self.tweets[indexPath.row]
         cell.delegate = self
@@ -205,7 +250,20 @@ extension TweetsViewController : UITableViewDataSource {
 extension TweetsViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        if tableView == self.menuTableView {
+            print(self.menuTitles[indexPath.row])
+            
+            if(self.menuTitles[indexPath.row] == "Compose") {
+                performSegue(withIdentifier: "composeSegue", sender: self)
+                return
+            }
+            if (self.menuTitles[indexPath.row] == "Profile") {
+                self.selectedProfileId = User.currentUser?.id!
+                performSegue(withIdentifier: "profileViewSegue", sender: self)
+                return
+            }
+            
+        }
     }
     
 }
