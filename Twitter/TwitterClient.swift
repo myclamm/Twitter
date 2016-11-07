@@ -140,6 +140,19 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
+    func getUserMentions(id: Int, success: @escaping (_ res: [Tweet])->(), failure: @escaping (Error)->()) {
+        get("1.1/statuses/user_timeline.json?user_id=\(id)", parameters: nil, progress: nil, success: { (task: URLSessionDataTask?, response: Any?) in
+            let dictionaries = response as! [NSDictionary]
+            
+            let tweets = Tweet.tweetsWithArray(dictionaries: dictionaries)
+            success(tweets)
+            
+            }, failure: {(task: URLSessionDataTask?, error: Error) in
+                failure(error)
+        })
+    }
+    
+    
     
     
 }

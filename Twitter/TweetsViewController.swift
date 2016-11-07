@@ -21,7 +21,7 @@ class TweetsViewController: UIViewController {
     @IBOutlet weak var headerProfileImageView: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     
-    var menuTitles = ["Profile","Compose"]
+    var menuTitles = ["Profile","Timeline","Mentions", "Compose"]
     var menuKey = [
         "Compose": "composeSegue",
         "Profile": "profileViewSegue"
@@ -254,8 +254,22 @@ extension TweetsViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == self.menuTableView {
             print(self.menuTitles[indexPath.row])
-            
+            if(self.menuTitles[indexPath.row] == "Timeline") {
+                
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.leftMarginConstraint.constant = 0
+                })
+                return
+            }
+            if(self.menuTitles[indexPath.row] == "Mentions") {
+                performSegue(withIdentifier: "mentionsSegue", sender: self)
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.leftMarginConstraint.constant = 0
+                })
+                return
+            }
             if(self.menuTitles[indexPath.row] == "Compose") {
+                
                 performSegue(withIdentifier: "composeSegue", sender: self)
                 UIView.animate(withDuration: 0.3, animations: {
                     self.leftMarginConstraint.constant = 0
@@ -263,10 +277,6 @@ extension TweetsViewController : UITableViewDelegate {
                 return
             }
             if (self.menuTitles[indexPath.row] == "Profile") {
-                /*self.selectedProfileId = User.currentUser?.id!
-                performSegue(withIdentifier: "profileViewSegue", sender: self)
-                return
-                */
                 self.selectedProfileId = User.currentUser?.id!
                 let destinationViewController = self.storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
                 TwitterClient.sharedInstance?.getUserProfile(id: selectedProfileId!, success: { (response: Any?) in
