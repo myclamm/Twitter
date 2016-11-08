@@ -83,13 +83,17 @@ class TweetsViewController: UIViewController {
         statsView.layer.borderColor = UIColor.gray.cgColor
         headerNameLabel.text = User.currentUser?.name!
         headerNameLabel.layer.zPosition = 1
-        headerScreenNameLabel.text = "@\((User.currentUser?.screenname!)!)"
-        headerScreenNameLabel.layer.zPosition = 1
         
-        headerTweetsLabel.text = String((User.currentUser?.tweetCount)! as Int)
-        headerFollowersLabel.text = String((User.currentUser?.followersCount)! as Int)
-        headerFollowingLabel.text = String((User.currentUser?.followingCount)! as Int)
+        if User.currentUser != nil {
+            headerScreenNameLabel.text = "@\((User.currentUser?.screenname!)!)"
+            headerScreenNameLabel.layer.zPosition = 1
+            
+            headerTweetsLabel.text = String((User.currentUser?.tweetCount)! as Int)
+            headerFollowersLabel.text = String((User.currentUser?.followersCount)! as Int)
+            headerFollowingLabel.text = String((User.currentUser?.followingCount)! as Int)
+        }
         
+ 
         if let profileImageURL = User.currentUser?.profileUrl {
             headerProfileImageView.setImageWith(profileImageURL)
             headerProfileImageView.layer.zPosition = 1
